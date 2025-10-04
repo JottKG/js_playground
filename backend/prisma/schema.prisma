@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String
+  username  String
+  createdAt DateTime
+}
+
+model Event {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  creatorId String  @db.ObjectId // who made this event[can be shared later?]
+  name      String // name of event?
+  color     String?
+  notes     String?
+}
+
+// indexable by userId and date.
+model DailyLog {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  date       DateTime
+  activities Json
+  notes      String?
+}
+
+// activies is in the following format
+//  "eventID1": ["09:00", "14:00"],
+//   "eventID2": ["10:00", "11:00", "20:00"]
+// lol why is there no foreign keys??
