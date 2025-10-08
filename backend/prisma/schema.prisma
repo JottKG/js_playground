@@ -20,12 +20,23 @@ model User {
   createdAt DateTime
 }
 
+model UserModules {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  modules Json
+}
+
 model Event {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  creatorId String  @db.ObjectId // who made this event[can be shared later?]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  creatorId String   @db.ObjectId // who made this event[can be shared later?]
   name      String // name of event?
   color     String?
   notes     String?
+  createdAt DateTime
+}
+
+model UserEvents {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  Events Json
 }
 
 // indexable by userId and date.
@@ -35,6 +46,11 @@ model DailyLog {
   date       DateTime
   activities Json
   notes      String?
+}
+
+model Module {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime
 }
 
 // activies is in the following format
