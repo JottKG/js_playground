@@ -1,1 +1,1 @@
-{"root":["../server.ts","../api/index.ts","../api/events/event.ts","../api/logging/log.ts","../api/users/user.ts"],"version":"5.9.3"}
+{"root":["../server.ts","../api/index.ts","../api/events/event.ts","../api/logging/log.ts","../api/users/user.ts","../common/dtos/userDTO.ts","../implementation/database/create-user.ts"],"version":"5.9.3"}
