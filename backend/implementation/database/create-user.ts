@@ -1,15 +1,15 @@
 
-import { PrismaClient } from '@prisma/client'
-import { UserDTO } from '../../common/dtos/userDTO.js'
+import { PrismaClient, Prisma } from '@prisma/client'
+import type { User } from '@prisma/client'
 const prisma = new PrismaClient()
-export async function generateUser(email_input: string): Promise<UserDTO | null> {
-    const user_exists = await prisma.user.findUnique({
+export async function generateUser(email_input: string): Promise<User> {
+    const user_exists: User | null = await prisma.user.findUnique({
         where: {
             email: email_input,
         },
     })
     if (user_exists != null) {
-        return null;
+        return user_exists;
     }
     else {
         const user = await prisma.user.create({
@@ -20,6 +20,6 @@ export async function generateUser(email_input: string): Promise<UserDTO | null>
             },
 
         })
-        return UserDTO.fromPrisma(user);
+        return user;
     }
 }

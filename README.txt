@@ -8,5 +8,6 @@ tasks to do for kptfl:
 - migrate mongodb database properly
 
 tasks done:
-- setup mongodb/prisma
+- setup mongodb/prisma <- done
+- set up debugger 
 - setup api endpoints

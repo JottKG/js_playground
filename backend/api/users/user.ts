@@ -9,10 +9,14 @@ const router = express.Router();
 
 
 // creates a new user, and returns their id 
+// request body:
+// {
+//    "email": "test@gov.ca"
+//}
 router.post('/', async (req, res) => {
     const email = req.body.email;
-    const generated_user: UserDTO | null = await generateUser(email);
-    res.send(generated_user?.toString());
+    const generated_user = await generateUser(email);
+    res.send(generated_user);
 });
 
 // enables a module for a user 
