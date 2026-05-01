@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^6.17.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "scripts": {
+    "build": "npx tsc --build",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon --inspect ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.7.0",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.3",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
+  }
+}
