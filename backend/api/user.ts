@@ -1,11 +1,7 @@
-import express from 'express';
-import { PrismaClient } from '@prisma/client'
-import { generateUser } from '../../implementation/database/create-user.js'
-import { UserDTO } from '../../common/dtos/userDTO.js'
-// setup constants to be used by all routes.
-const router = express.Router();
 
-// api endpoint for users/
+import express from 'express';
+import { generateUser, getUserInfo } from '../implementation/user.js';
+const router = express.Router();
 
 
 // creates a new user, and returns their id 
@@ -13,17 +9,13 @@ const router = express.Router();
 // {
 //    "email": "test@gov.ca"
 //}
-router.post('/', async (req, res) => {
+//adds user
+router.post('/user', async (req, res) => {
     const email = req.body.email;
     const generated_user = await generateUser(email);
-    res.send(generated_user);
+    res.status(201);
+    res.send({ id: generated_user.id });
 });
-
-// enables a module for a user 
-router.post('/modules/:moduleid', (req, res) => {
-    res.send('You are in Route 1');
-});
-
 
 // updates some user information given a id and a body with information.
 router.put('/:id', (req, res) => {
@@ -32,10 +24,10 @@ router.put('/:id', (req, res) => {
 
 // get user information, this should do some auth to check if they can actually send this btw.
 router.get('/:id', (req, res) => {
-    res.send('You are in Route 1');
+    const params = req.params;
+    const userId = params.id;
+    res.send(getUserInfo(userId));
 });
 
+
 export const userRoutes = router;
-
-
-

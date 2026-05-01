@@ -1,0 +1,34 @@
+.layout {
+    display: grid;
+    /* make page into grid */
+    grid-template-columns: 250px 1fr;
+    /* make page into grid */
+    grid-template-rows: 80px 1fr;
+
+    grid-template-areas:
+        "sidebar toolbar"
+        "sidebar timeline";
+
+    height: 100vh;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.toolbar {
+    grid-area: toolbar;
+}
+
+.timeline {
+    grid-area: timeline;
+}
+
+aside {
+    width: 30%;
+    padding-left: 15px;
+    margin-left: 15px;
+    float: right;
+    font-style: italic;
+    background-color: lightgray;
+}

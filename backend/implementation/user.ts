@@ -23,3 +23,16 @@ export async function generateUser(email_input: string): Promise<User> {
         return user;
     }
 }
+
+// can be implemented later.
+export async function updateUserInfo(email_input: string): Promise<User | null> {
+    return null;
+}
+export async function getUserInfo(email_input: string): Promise<User | null> {
+    return await prisma.user.findUnique({
+        where: {
+            email: email_input,
+        },
+    })
+
+}

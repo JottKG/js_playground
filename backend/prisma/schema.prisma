@@ -16,12 +16,13 @@ generator client {
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
-  username  String?
+  username  String   @unique
   createdAt DateTime
 }
 
 model UserModules {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @unique
   modules Json
 }
 
@@ -35,21 +36,26 @@ model Event {
 }
 
 model UserEvents {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  Events Json
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String   @unique
+  eventIds String[] @db.ObjectId
 }
 
 // indexable by userId and date.
 model DailyLog {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String   @db.ObjectId
-  date       DateTime
+  dateKey    DateTime // "2026-01-10", always rounded
   activities Json
   notes      String?
+
+  @@unique([userId, dateKey], name: "userIdDateKey")
 }
 
 model Module {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  info      Json
   createdAt DateTime
 }
 
